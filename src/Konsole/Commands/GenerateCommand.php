@@ -12,6 +12,7 @@ class GenerateCommand extends Command
     protected $signature = 'generate
                             {name : Command Name}
                             {--C|command= : The name and signature of the console command}
+                            {--D|description= : The description of the console command}
                             {--F|force : Force write when command target already exists}';
 
     /**
@@ -29,7 +30,7 @@ class GenerateCommand extends Command
 
         $this->makeSure(($path = "{$basePath}/Commands/{$name}.php"), ($this->option('force') === true));
 
-        $this->putFile($path, $this->compileStubFile($name, ($this->option('command') ?: ''), $basePath));
+        $this->putFile($path, $this->compileStubFile($name, ($this->option('command') ?: ''), ($this->option('description') ?: ''), $basePath));
 
         $this->info("==> Command has been generated successfully in {$path}.");
 
@@ -63,11 +64,11 @@ class GenerateCommand extends Command
      *
      * @return string
      */
-    protected function compileStubFile($name, $command, $basePath)
+    protected function compileStubFile($name, $command, $description, $basePath)
     {
         return str_replace(
-            ['{{name}}', '{{command}}'],
-            [$name, $command],
+            ['{{name}}', '{{command}}', '{{description}}'],
+            [$name, $command, $description],
             file_get_contents("{$basePath}/stubs/CommandStub.stub")
         );
     }

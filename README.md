@@ -59,6 +59,12 @@ The command above would generate a class at `src/Konsole/Commands/SendEmails.php
 php konsole make:console SendEmails --command=emails:send
 ```
 
+To add a description in your newly generated command, you can supply `--description` or `-D` option:
+
+```sh
+php konsole make:console SendEmails --command=emails:send --description='Send email to a given user id.'
+```
+
 If you want to force generate the command, you may supply `--force` or `-F` option:
 
 ```sh
