@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/krisanalfa/konsole/license)](https://packagist.org/packages/krisanalfa/konsole)
 
 - [Introduction](#introduction)
-- [Installing](#insalling)
+- [Installing](#installing)
 - [Writing Commands](#writing-commands)
     - [Command Structure](#command-structure)
 - [Command I/O](#command-io)
