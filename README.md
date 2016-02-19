@@ -1,5 +1,9 @@
 # Konsole
 
+[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/version)](https://packagist.org/packages/krisanalfa/konsole)
+[![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](https://packagist.org/packages/krisanalfa/konsole)
+[![License](https://poser.pugx.org/phpunit/phpunit/license)](https://packagist.org/packages/krisanalfa/konsole)
+
 - [Introduction](#introduction)
 - [Installing](#insalling)
 - [Writing Commands](#writing-commands)
