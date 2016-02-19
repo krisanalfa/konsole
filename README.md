@@ -1,8 +1,11 @@
 # Konsole
 
 [![Latest Stable Version](https://poser.pugx.org/krisanalfa/konsole/version)](https://packagist.org/packages/krisanalfa/konsole)
+[![Latest Unstable Version](https://poser.pugx.org/krisanalfa/konsole/v/unstable)](https://packagist.org/packages/krisanalfa/konsole)
 [![Total Downloads](https://poser.pugx.org/krisanalfa/konsole/downloads)](https://packagist.org/packages/krisanalfa/konsole)
 [![License](https://poser.pugx.org/krisanalfa/konsole/license)](https://packagist.org/packages/krisanalfa/konsole)
+[![Monthly Downloads](https://poser.pugx.org/krisanalfa/konsole/d/monthly)](https://packagist.org/packages/krisanalfa/konsole)
+[![Daily Downloads](https://poser.pugx.org/krisanalfa/konsole/d/daily)](https://packagist.org/packages/krisanalfa/konsole)
 
 - [Introduction](#introduction)
 - [Installing](#installing)
