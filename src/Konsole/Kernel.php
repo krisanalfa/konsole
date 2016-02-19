@@ -2,9 +2,7 @@
 
 namespace Konsole;
 
-use Konsole\Konsole;
-use Konsole\Application;
-use Illuminate\Console\Scheduling\Schedule;
+
 
 class Kernel
 {
@@ -55,7 +53,7 @@ class Kernel
     }
 
     /**
-     * Run an Konsole console command by name.
+     * Run a Konsole console command by name.
      *
      * @param string $command
      * @param array  $parameters
@@ -85,6 +83,16 @@ class Kernel
     public function output()
     {
         return $this->konsole()->output();
+    }
+
+    /**
+     * Get all registered commands.
+     *
+     * @return array
+     */
+    public function commands()
+    {
+        return $this->commands;
     }
 
     /**

@@ -17,20 +17,26 @@
 
 Konsole is a minimum console application built on Laravel Console components. To view a list of all available Konsole commands, you may use the `list` command:
 
-    php konsole list
+```sh
+php konsole list
+```
 
 Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, simply precede the name of the command with `help`:
 
-    php konsole help generate
+```sh
+php konsole help generate
+```
 
 <a name="installing"></a>
 ## Installing
 
 Installing konsole is simple via `composer` command:
 
-    composer create-project krisanalfa/konsole my-console-application
-    cd my-console-application
-    php konsole --version
+```sh
+composer create-project krisanalfa/konsole my-console-application
+cd my-console-application
+php konsole --version
+```
 
 <a name="writing-commands"></a>
 ## Writing Commands
@@ -39,11 +45,21 @@ In addition to the commands provided with Konsole, you may also build your own c
 
 To create a new command, you may use the `generate` Konsole command, which will generate a command stub to help you get started:
 
-    php konsole generate SendEmails
+```sh
+php konsole generate SendEmails
+```
 
-The command above would generate a class at `src/Konsole/Commands/SendEmails.php`. When creating the command, the `--command` option may be used to assign the terminal command name:
+The command above would generate a class at `src/Konsole/Commands/SendEmails.php`. When creating the command, the `--command` or `-C` option may be used to assign the terminal command name:
 
-    php konsole make:console SendEmails --command=emails:send
+```sh
+php konsole make:console SendEmails --command=emails:send
+```
+
+If you want to force generate the command, you may supply `--force` or `-F` option:
+
+```sh
+php konsole make:console SendEmails --command=emails:send --force
+```
 
 <a name="command-structure"></a>
 ### Command Structure
@@ -128,7 +144,9 @@ protected $signature = 'email:send {user} {--pretending}';
 
 In this example, the `--pretending` switch may be specified when calling the Konsole command. If the `--pretending` switch is passed, the value of the option will be `true`. Otherwise, the value will be `false`:
 
-    php konsole email:send 1 --pretending
+```sh
+php konsole email:send 1 --pretending
+```
 
 You may also specify that the option should be assigned a value by the user by suffixing the option name with a `=` sign, indicating that a value should be provided:
 
@@ -143,21 +161,32 @@ protected $signature = 'email:send {user} {--pretending=}';
 
 In this example, the user may pass a value for the option like so:
 
-    php konsole email:send 1 --pretending=default
+```sh
+php konsole email:send 1 --pretending=default
+```
 
 You may also assign default values to options:
 
-    email:send {user} {--pretending=default}
+```php
+protected $signature = 'email:send {user} {--pretending=default}';
+```
 
 To assign a shortcut when defining an option, you may specify it before the option name and use a | delimiter to separate the shortcut from the full option name:
 
-    email:send {user} {--P|pretending}
-
+```php
+protected $signature = 'email:send {user} {--P|pretending}';
+```
 If you would like to define arguments or options to expect array inputs, you may use the `*` character:
 
-    email:send {user*}
+```php
+protected $signature = 'email:send {user*}';
+```
 
-    email:send {user} {--id=*}
+Or:
+
+```php
+protected $signature = 'email:send {user} {--id=*}';
+```
 
 #### Input Descriptions
 
@@ -295,6 +324,12 @@ If you want to display plain console output, use the `line` method. The `line` m
 ```php
 $this->line('Display this on the screen');
 ````
+
+If you want to suggest user to do something, you can use the `suggest` method:
+
+```php
+$this->suggest('Better you pick Sven, because you have Magnus on your side.');
+```
 
 #### Table Layouts
 

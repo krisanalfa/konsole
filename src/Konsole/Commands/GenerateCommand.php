@@ -7,72 +7,87 @@ use Konsole\Command;
 class GenerateCommand extends Command
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $signature = 'generate
                             {name : Command Name}
-                            {--command= : The command you can call in Konsole Application}';
+                            {--C|command= : The name and signature of the console command}
+                            {--F|force : Force write when command target already exists}';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected $description = 'Generate new Konsole command';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle()
     {
         $name = $this->argument('name');
-        $command = $this->option('command') ?: '';
-        $compiled = $this->compileStubFile($name, $command);
-        $path = dirname(__DIR__)."/Commands/{$name}.php";
-        $kernelPath = dirname(__DIR__).'/Kernel.php';
+        $basePath = dirname(__DIR__);
 
-        if (file_exists($path)) {
-            if (!$this->confirm('File already exists, do you want to replace? [y|N]')) {
-                $this->warn('==> Cannot generate command because destination file already exists.');
+        $this->makeSure(($path = "{$basePath}/Commands/{$name}.php"), ($this->option('force') === true));
 
-                return 1;
-            }
-        }
-
-        $this->putFile($path, $compiled);
+        $this->putFile($path, $this->compileStubFile($name, ($this->option('command') ?: ''), $basePath));
 
         $this->info("==> Command has been generated successfully in {$path}.");
-        $this->line('');
-        $this->line("==> Caveats");
-        $this->comment("To make {$name} runnable add 'Konsole\\Commands\\{$name}' in {$kernelPath}.");
 
-        return 0;
+        $this->suggest("To make {$name} command runnable add 'Konsole\\Commands\\{$name}::\$commands' in {$basePath}/Kernel.php.");
+    }
+
+    /**
+     * Make sure if user want to replace existing class.
+     *
+     * @param string $path
+     * @param bool   $force
+     */
+    protected function makeSure($path, $force)
+    {
+        if (($force === false)
+            and (file_exists($path))
+            and ($this->confirm('File already exists, do you want to replace? [y|N]') === false)
+        ) {
+            $this->warn('==> Cannot generate command because destination file already exists.');
+
+            die(1);
+        }
     }
 
     /**
      * Compile stub file.
      *
-     * @param  string $name Class name.
+     * @param string $name     Class name.
+     * @param string $command
+     * @param string $basePath
      *
      * @return string
      */
-    protected function compileStubFile($name, $command)
+    protected function compileStubFile($name, $command, $basePath)
     {
         return str_replace(
             ['{{name}}', '{{command}}'],
             [$name, $command],
-            file_get_contents(dirname(__DIR__).'/stubs/CommandStub.stub')
+            file_get_contents("{$basePath}/stubs/CommandStub.stub")
         );
     }
 
     /**
      * Put compiled stub to certain path.
      *
-     * @param  string $path
-     * @param  string $content
+     * @param string $path
+     * @param string $content
      *
-     * @return void
+     * @return int|void
      */
     protected function putFile($path, $content)
     {
-        file_put_contents($path, $content);
+        if ((is_writable(dirname($path)) === false)) {
+            $this->error("Destination {$path} is not writable.");
+
+            die(1);
+        }
+
+        return file_put_contents($path, $content);
     }
 }

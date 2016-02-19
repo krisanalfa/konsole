@@ -42,7 +42,7 @@ class Application extends Container
     {
         $abstract = $this->getAlias($this->normalize($abstract));
 
-        if (array_key_exists($abstract, $this->availableBindings) &&
+        if (array_key_exists($abstract, $this->availableBindings) and
             !array_key_exists($this->availableBindings[$abstract], $this->ranServiceBinders)) {
             $this->{$method = $this->availableBindings[$abstract]}();
 
