@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file. This projec
 
 ---
 
+### [0.0.4] - 2016-20-02
+#### Update
+- Composer lock and configuration file.
+
+---
+
 ### [0.0.3] - 2016-20-02
 #### Added
 - `--description` option on `generate` command from [@krisanalfa](https://github.com/krisanalfa).

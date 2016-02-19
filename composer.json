@@ -1,6 +1,7 @@
 {
     "name": "krisanalfa/konsole",
-    "description": "Console App with PHP.",
+    "description": "Minimum Console Application with PHP.",
+    "keywords": ["php", "console", "application", "minimum", "project"],
     "type": "project",
     "require": {
         "illuminate/console": "^5.2",
