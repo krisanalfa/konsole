@@ -30,7 +30,7 @@ class GenerateCommand extends Command
 
         $this->makeSure(($path = "{$basePath}/Commands/{$name}.php"), ($this->option('force') === true));
 
-        $this->putFile($path, $this->compileStubFile($name, ($this->option('command') ?: ''), ($this->option('description') ?: ''), $basePath));
+        $this->putFile($path, $this->compileStubFile($name, $this->option('command'), $this->option('description'), $basePath));
 
         $this->info("==> Command has been generated successfully in {$path}.");
 

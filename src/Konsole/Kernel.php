@@ -2,8 +2,6 @@
 
 namespace Konsole;
 
-
-
 class Kernel
 {
     /**

@@ -28,4 +28,4 @@ $app = require __DIR__.'/bootstrap/app.php';
 |
 */
 
-exit($app->make('Konsole\Kernel')->handle(new ArgvInput, new ConsoleOutput));
+exit($app->make('Konsole\Kernel')->handle(new ArgvInput(), new ConsoleOutput()));
