@@ -34,7 +34,7 @@ php konsole help generate
 <a name="installing"></a>
 ## Installing
 
-Installing Konsole is simple via `composer` command:
+Installing Konsole can be done simply via `composer` command:
 
 ```sh
 composer create-project krisanalfa/konsole my-console-application
