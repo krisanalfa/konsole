@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. This projec
 ### [Unreleased]
 #### Added
 - Adding changelog to the loop.
+- Unit testing.
+- Simplified signature in `generate` command.
+- README translation.
 
 ### [0.0.3] - 2016-20-02
 #### Added
