@@ -34,7 +34,7 @@ php konsole help generate
 <a name="installing"></a>
 ## Installing
 
-Installing konsole is simple via `composer` command:
+Installing Konsole is simple via `composer` command:
 
 ```sh
 composer create-project krisanalfa/konsole my-console-application
@@ -283,13 +283,13 @@ if ($this->confirm('Do you wish to continue? [y|N]')) {
 The `anticipate` method can be used to provide autocompletion for possible choices. The user can still choose any answer, regardless of the auto-completion hints:
 
 ```php
-$name = $this->anticipate('What is your name?', ['Krisan', 'Fitria']);
+$name = $this->anticipate('What is your name?', ['Alfa', 'Fitria']);
 ```
 
 If you need to give the user a predefined set of choices, you may use the `choice` method. The user chooses the index of the answer, but the value of the answer will be returned to you. You may set the default value to be returned if nothing is chosen:
 
 ```php
-$name = $this->choice('What is your name?', ['Krisan', 'Fitria'], $default);
+$name = $this->choice('What is your name?', ['Alfa', 'Fitria'], $default);
 ```
 
 <a name="writing-output"></a>
