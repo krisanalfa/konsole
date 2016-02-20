@@ -8,6 +8,15 @@ use Illuminate\Support\ServiceProvider;
 class Application extends Container
 {
     /**
+     * The Konsole commands provided by your application.
+     *
+     * @var array
+     */
+    private static $commands = [
+        'Konsole\Commands\GenerateCommand',
+    ];
+
+    /**
      * The loaded service providers.
      *
      * @var array
@@ -53,6 +62,16 @@ class Application extends Container
     }
 
     /**
+     * Get all registered commands.
+     *
+     * @return array
+     */
+    public function commands()
+    {
+        return static::$commands;
+    }
+
+    /**
      * Register a service provider with the application.
      *
      * @param \Illuminate\Support\ServiceProvider|string $provider
@@ -78,12 +97,36 @@ class Application extends Container
     }
 
     /**
+     * Register a command.
+     *
+     * @param  string $command
+     */
+    public function registerCommand($command)
+    {
+        if (array_key_exists($command, static::$commands) === false) {
+            static::$commands[] = $command;
+        }
+    }
+
+    /**
+     * Register commands.
+     *
+     * @param array $commands
+     */
+    public function registerCommands(array $commands)
+    {
+        $commands = array_merge(static::$commands, $commands);
+
+        static::$commands = array_unique($commands);
+    }
+
+    /**
      * Get the version number of the application.
      *
      * @return string
      */
     public function version()
     {
-        return 'Konsole (0.0.1) (Illuminate Components 5.2.*)';
+        return 'Konsole (0.0.5) (Illuminate Components 5.2.*)';
     }
 }

@@ -375,21 +375,24 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 <a name="registering-commands"></a>
 ## Registering Commands
 
-Once your command is finished, you need to register it with Konsole so it will be available for use. This is done within the `src/Konsole/Kernel.php` file.
+Once your command is finished, you need to register it with Konsole so it will be available for use. This is done within the `bootstrap/app.php` file.
 
-Within this file, you will find a list of commands in the `commands` property. To register your command, simply add the class name to the list. When Konsole boots, all the commands listed in this property will be registered with Konsole:
+Within this file, you may register your own command via `registerCommand` method:
 
 ```php
-/**
- * The Konsole commands provided by your application.
- *
- * @var array
- */
-protected $commands = [
-    'Konsole\Commands\GenerateCommand',
-    'Konsole\Commands\SendEmail',
-];
+$konsole->registerCommand('Konsole\Commands\SendEmails');
 ```
+
+Or if you wish to add more than one commands, you may use the `registerCommands` method:
+
+```php
+$konsole->registerCommands([
+    'Konsole\Commands\FooBarBaz',
+    'Konsole\Commands\SendEmails',
+    'Konsole\Commands\AnotherCommand',
+]);
+```
+
 <a name="calling-commands-from-other-commands"></a>
 ## Calling Commands From Other Commands
 

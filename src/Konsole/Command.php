@@ -365,13 +365,15 @@ abstract class Command extends SymfonyCommand
     /**
      * Show suggestion a.k.a chaveats.
      *
-     * @param string $suggestion
+     * @param string          $suggestion
+     * @param string          $style
+     * @param null|int|string $verbosity
      */
-    public function suggest($suggestion)
+    public function suggest($suggestion, $style = null, $verbosity = null)
     {
-        $this->line('');
-        $this->line('==> Caveats');
-        $this->line($suggestion);
+        $this->line('', $style, $verbosity);
+        $this->line('==> Caveats', $style, $verbosity);
+        $this->line($suggestion, $style, $verbosity);
     }
 
     /**

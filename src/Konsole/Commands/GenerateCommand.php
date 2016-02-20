@@ -34,7 +34,7 @@ class GenerateCommand extends Command
 
         $this->info("==> Command has been generated successfully in {$path}.");
 
-        $this->suggest("To make {$name} command runnable add 'Konsole\\Commands\\{$name}::\$commands' in {$basePath}/Kernel.php.");
+        $this->suggest("To make {$name} command runnable, register it with the 'registerCommand' method in {$basePath}/bootstrap/app.php.");
     }
 
     /**

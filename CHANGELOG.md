@@ -5,16 +5,21 @@ All notable changes to this project will be documented in this file. This projec
 
 ### [Unreleased]
 #### Added
-- Adding changelog to the loop.
 - Unit testing.
 - Simplified signature in `generate` command.
 - README translation.
 
 ---
 
+### [0.0.5] - 2016-20-02
+#### Added
+- Method to register command via `registerCommand` and `registerCommands` from [@krisanalfa](https://github.com/krisanalfa).
+
+---
+
 ### [0.0.4] - 2016-20-02
 #### Update
-- Composer lock and configuration file.
+- Composer lock and configuration file by [@krisanalfa](https://github.com/krisanalfa).
 
 ---
 

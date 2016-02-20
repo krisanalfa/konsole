@@ -19,15 +19,6 @@ class Kernel
     protected $konsole;
 
     /**
-     * The Konsole commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        'Konsole\Commands\GenerateCommand',
-    ];
-
-    /**
      * Create a new console kernel instance.
      *
      * @param \Konsole\Application $app
@@ -84,16 +75,6 @@ class Kernel
     }
 
     /**
-     * Get all registered commands.
-     *
-     * @return array
-     */
-    public function commands()
-    {
-        return $this->commands;
-    }
-
-    /**
      * Get the Konsole application instance.
      *
      * @return \Konsole\Konsole
@@ -102,7 +83,7 @@ class Kernel
     {
         if (is_null($this->konsole)) {
             return $this->konsole = (new Konsole($this->app, $this->app->version()))
-                                ->resolveCommands($this->commands);
+                                ->resolveCommands($this->app->commands());
         }
 
         return $this->konsole;

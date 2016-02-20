@@ -13,8 +13,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = new Konsole\Application(
+$konsole = new Konsole\Application(
     realpath(__DIR__.'/../')
 );
 
-return $app;
+return $konsole;
