@@ -10,8 +10,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 |--------------------------------------------------------------------------
 |
 | First we need to get an application instance. This creates an instance
-| of the application / container and bootstraps the application so it
-| is ready to receive HTTP / Console requests from the environment.
+| of the application / container and bootstraps the application.
 |
 */
 
@@ -19,7 +18,7 @@ $konsole = require __DIR__.'/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
-| Run The Artisan Application
+| Run The Konsole Application
 |--------------------------------------------------------------------------
 |
 | When we run the console application, the current CLI command will be

@@ -18,6 +18,7 @@
     - [Writing Output](#writing-output)
 - [Registering Commands](#registering-commands)
 - [Calling Commands from Other Commands](#calling-commands-from-other-commands)
+- [Logging](#logging)
 
 <a name="introduction"></a>
 ## Introduction
@@ -121,7 +122,7 @@ class SendEmails extends Command
 <a name="defining-input-expectations"></a>
 ### Defining Input Expectations
 
-When writing console commands, it is common to gather input from the user through arguments or options. Laravel makes it very convenient to define the input you expect from the user using the `signature` property on your commands. The `signature` property allows you to define the name, arguments, and options for the command in a single, expressive, route-like syntax.
+When writing console commands, it is common to gather input from the user through arguments or options. Konsole makes it very convenient to define the input you expect from the user using the `signature` property on your commands. The `signature` property allows you to define the name, arguments, and options for the command in a single, expressive, route-like syntax.
 
 All user supplied arguments and options are wrapped in curly braces. In the following example, the command defines one **required** argument: `user`:
 
@@ -375,23 +376,32 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 <a name="registering-commands"></a>
 ## Registering Commands
 
-Once your command is finished, you need to register it with Konsole so it will be available for use. This is done within the `bootstrap/app.php` file.
+Once your command is finished, you need to register it with Konsole so it will be available for use. This done within the `config/app.php`. You may add your commands in `commands` section:
 
-Within this file, you may register your own command via `registerCommand` method:
+```php
+'commands' => [
+    'Konsole\Commands\SendEmails',
+    'Konsole\Commands\GenerateCommand',
+],
+```
+
+In some cases you may want to register your command via Service Provider. This is done within the `bootstrap/app.php` file. Within this file, you may register your own command via `registerCommand` method:
 
 ```php
 $konsole->registerCommand('Konsole\Commands\SendEmails');
 ```
 
-Or if you wish to add more than one commands, you may use the `registerCommands` method:
+Or if you wish to add more than one commands, you may pass the argument of `registerCommand` method in array:
 
 ```php
-$konsole->registerCommands([
+$konsole->registerCommand([
     'Konsole\Commands\FooBarBaz',
     'Konsole\Commands\SendEmails',
     'Konsole\Commands\AnotherCommand',
 ]);
 ```
+
+Or if
 
 <a name="calling-commands-from-other-commands"></a>
 ## Calling Commands From Other Commands
@@ -420,4 +430,37 @@ If you would like to call another console command and suppress all of its output
 $this->callSilent('email:send', [
     'user' => 1, '--pretending' => 'default'
 ]);
+```
+
+<a name="logging"></a>
+## Logging
+
+The Konsole logging facilities provide a simple layer on top of the powerful [Monolog](http://github.com/seldaek/monolog) library. By default, Konsole is configured to create daily log files for your application which are stored in the `var/log` directory. You may write information to the logs using the `$konsole->make('log')` object:
+The logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
+
+```php
+$konsole->make('log')->emergency($error);
+$konsole->make('log')->alert($error);
+$konsole->make('log')->critical($error);
+$konsole->make('log')->error($error);
+$konsole->make('log')->warning($error);
+$konsole->make('log')->notice($error);
+$konsole->make('log')->info($error);
+$konsole->make('log')->debug($error);
+```
+
+#### Contextual Information
+
+An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:
+
+```php
+$konsole->make('log')->info('User failed to login.', ['id' => $user->id]);
+```
+
+#### Accessing The Underlying Monolog Instance
+
+Monolog has a variety of additional handlers you may use for logging. If needed, you may access the underlying Monolog instance being used by Konsole:
+
+```php
+$monolog = $konsole->make('log');
 ```

@@ -6,7 +6,9 @@
     "require": {
         "illuminate/console": "^5.2",
         "illuminate/support": "^5.2",
-        "illuminate/container": "^5.2"
+        "illuminate/container": "^5.2",
+        "illuminate/config": "^5.2",
+        "monolog/monolog": "^1.17"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.0"

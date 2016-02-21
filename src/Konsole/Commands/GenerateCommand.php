@@ -26,7 +26,7 @@ class GenerateCommand extends Command
     public function handle()
     {
         $name = $this->argument('name');
-        $basePath = dirname(__DIR__);
+        $basePath = $this->app()->basePath('src/Konsole');
 
         $this->makeSure(($path = "{$basePath}/Commands/{$name}.php"), ($this->option('force') === true));
 

@@ -6,8 +6,21 @@ All notable changes to this project will be documented in this file. This projec
 ### [Unreleased]
 #### Added
 - Unit testing.
-- Simplified signature in `generate` command.
 - README translation.
+
+---
+
+### [1.0.0] - 2016-21-02
+#### Added
+- Configuration repository from [@krisanalfa](https://github.com/krisanalfa).
+- Registerring commands via configuration from [@krisanalfa](https://github.com/krisanalfa).
+- Konsole logging support from [@krisanalfa](https://github.com/krisanalfa).
+
+#### Changes
+- Merge `registerCommand` and `registerCommands` from [@krisanalfa](https://github.com/krisanalfa).
+
+#### Fixes
+- Bind a singleton application context from [@krisanalfa](https://github.com/krisanalfa).
 
 ---
 

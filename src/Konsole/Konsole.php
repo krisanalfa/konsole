@@ -2,7 +2,6 @@
 
 namespace Konsole;
 
-use Illuminate\Contracts\Container\Container;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Application as SymfonyApplication;
@@ -27,12 +26,12 @@ class Konsole extends SymfonyApplication
     /**
      * Create a new Artisan console application.
      *
-     * @param \Illuminate\Contracts\Container\Container $application
-     * @param string                                    $version
+     * @param \Konsole\Application $application
+     * @param string               $version
      */
-    public function __construct(Container $application, $version)
+    public function __construct(Application $application, $version)
     {
-        parent::__construct('Konsole', $version);
+        parent::__construct($application->name(), $application->version());
 
         $this->application = $application;
     }
