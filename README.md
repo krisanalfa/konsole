@@ -435,8 +435,8 @@ $this->callSilent('email:send', [
 <a name="logging"></a>
 ## Logging
 
-The Konsole logging facilities provide a simple layer on top of the powerful [Monolog](http://github.com/seldaek/monolog) library. By default, Konsole is configured to create daily log files for your application which are stored in the `var/log` directory. You may write information to the logs using the `$konsole->make('log')` object:
-The logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
+The Konsole logging facilities provide a simple layer on top of the powerful [Monolog](http://github.com/seldaek/monolog) library. By default, Konsole is configured to create daily log files for your application which are stored in the `var/log` directory. You may write information to the logs using the `$konsole->make('log')` object.
+The Konsole logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
 
 ```php
 $konsole->make('log')->emergency($error);
