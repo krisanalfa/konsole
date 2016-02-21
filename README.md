@@ -401,8 +401,6 @@ $konsole->registerCommand([
 ]);
 ```
 
-Or if
-
 <a name="calling-commands-from-other-commands"></a>
 ## Calling Commands From Other Commands
 
