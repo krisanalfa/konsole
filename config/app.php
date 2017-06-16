@@ -34,7 +34,6 @@ return [
     */
     'commands' => [
         Konsole\Commands\GenerateCommand::class,
-        Konsole\Commands\BenchmarkCommand::class,
     ],
 
 ];
