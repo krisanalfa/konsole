@@ -437,14 +437,14 @@ The Konsole logging facilities provide a simple layer on top of the powerful [Mo
 The Konsole logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
 
 ```php
-$konsole->make('log')->emergency($error);
-$konsole->make('log')->alert($error);
-$konsole->make('log')->critical($error);
-$konsole->make('log')->error($error);
-$konsole->make('log')->warning($error);
-$konsole->make('log')->notice($error);
-$konsole->make('log')->info($error);
-$konsole->make('log')->debug($error);
+$konsole->log->emergency($message);
+$konsole->log->alert($message);
+$konsole->log->critical($message);
+$konsole->log->message($message);
+$konsole->log->warning($message);
+$konsole->log->notice($message);
+$konsole->log->info($message);
+$konsole->log->debug($message);
 ```
 
 #### Contextual Information
