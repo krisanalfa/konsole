@@ -29,12 +29,8 @@ class GenerateCommand extends Command
         $basePath = $this->app()->basePath('src/Konsole');
 
         $this->makeSure(($path = "{$basePath}/Commands/{$name}.php"), ($this->option('force') === true));
-
-        $this->putFile($path, $this->compileStubFile($name, $this->option('command'), $this->option('description'), $basePath));
-
-        $this->info("==> Command has been generated successfully in {$path}.");
-
-        $this->suggest("To make {$name} command runnable, register it with the 'registerCommand' method in {$basePath}/bootstrap/app.php.");
+        $this->writeFile($path, $this->compileStubFile($name, $this->option('command'), $this->option('description'), $basePath));
+        $this->info("Command has been generated successfully.");
     }
 
     /**
@@ -45,11 +41,10 @@ class GenerateCommand extends Command
      */
     protected function makeSure($path, $force)
     {
-        if (($force === false)
-            && (file_exists($path))
-            && ($this->confirm('File already exists, do you want to replace? [y|N]') === false)
+        if (($force === false && file_exists($path))
+            && !$this->confirm('File already exists, do you want to replace? [y|N]')
         ) {
-            $this->warn('==> Cannot generate command because destination file already exists.');
+            $this->warn('Cannot generate command because destination file already exists.');
 
             die(1);
         }
@@ -81,14 +76,8 @@ class GenerateCommand extends Command
      *
      * @return int|void
      */
-    protected function putFile($path, $content)
+    protected function writeFile($path, $content)
     {
-        if ((is_writable(dirname($path)) === false)) {
-            $this->error("Destination {$path} is not writable.");
-
-            die(1);
-        }
-
         return file_put_contents($path, $content);
     }
 }
