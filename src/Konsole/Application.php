@@ -177,9 +177,9 @@ class Application extends Container
      */
     public function make($abstract, array $parameters = [])
     {
-        $abstract = $this->getAlias($this->normalize($abstract));
+        $abstract = $this->getAlias($abstract);
 
-        if (array_key_exists($abstract, $this->availableBindings) and
+        if (array_key_exists($abstract, $this->availableBindings) &&
             !array_key_exists($this->availableBindings[$abstract], $this->ranServiceBinders)) {
             $this->{$method = $this->availableBindings[$abstract]}();
 
@@ -187,51 +187,6 @@ class Application extends Container
         }
 
         return parent::make($abstract, $parameters);
-    }
-
-    /**
-     * Register a service provider with the application.
-     *
-     * @param \Illuminate\Support\ServiceProvider|string $provider
-     * @param array                                      $options
-     * @param bool                                       $force
-     *
-     * @return \Illuminate\Support\ServiceProvider
-     */
-    public function register($provider, $options = [], $force = false)
-    {
-        if (!$provider instanceof ServiceProvider) {
-            $provider = new $provider($this);
-        }
-
-        if (array_key_exists($providerName = get_class($provider), $this->loadedProviders)) {
-            return;
-        }
-
-        $this->loadedProviders[$providerName] = true;
-
-        $provider->register();
-        $provider->boot();
-    }
-
-    /**
-     * Configure and load the given component and provider.
-     *
-     * @param string       $config
-     * @param array|string $providers
-     * @param string|null  $return
-     *
-     * @return mixed
-     */
-    public function loadComponent($config, $providers, $return = null)
-    {
-        $this->configure($config);
-
-        foreach ((array) $providers as $provider) {
-            $this->register($provider);
-        }
-
-        return $this->make($return ?: $config);
     }
 
     /**
@@ -279,7 +234,8 @@ class Application extends Container
      */
     protected function registerConfigBindings()
     {
-        $this->singleton(['Illuminate\Contracts\Config\Repository' => 'config'], 'Illuminate\Config\Repository');
+        $this->singleton('Illuminate\Contracts\Config\Repository', 'Illuminate\Config\Repository');
+        $this->alias('Illuminate\Contracts\Config\Repository', 'config');
     }
 
     /**
@@ -287,9 +243,10 @@ class Application extends Container
      */
     protected function registerApplicationBindings()
     {
-        $this->singleton(['Konsole\Application' => 'app'], function () {
+        $this->singleton('Konsole\Application', function () {
             return $this;
         });
+        $this->alias('Konsole\Application', 'app');
     }
 
     /**
@@ -297,9 +254,10 @@ class Application extends Container
      */
     protected function registerLogBindings()
     {
-        $this->singleton(['Psr\Log\LoggerInterface' => 'log'], function () {
+        $this->singleton('Psr\Log\LoggerInterface', function () {
             return new Logger($this->name(), [$this->getMonologHandler()]);
         });
+        $this->alias('Psr\Log\LoggerInterface', 'log');
     }
 
     /**

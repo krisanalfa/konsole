@@ -25,6 +25,7 @@ $konsole = new Konsole\Application(
 |
 */
 $konsole->registerCommand([
+    //
 ]);
 
 return $konsole;

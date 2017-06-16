@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | You may define your own application name here. Think about cool name like
-    | 'Sven', 'Lion', 'Tidehunter', etc.
+    | 'Sven', 'Kunkka', 'Tidehunter', etc.
     |
     */
     'name' => 'Konsole',
@@ -22,7 +22,7 @@ return [
     | which comply with semver see more here http://semver.org/.
     |
     */
-    'version' => '1.0.0',
+    'version' => '2.0.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,8 @@ return [
     |
     */
     'commands' => [
-        'Konsole\Commands\GenerateCommand',
+        Konsole\Commands\GenerateCommand::class,
+        Konsole\Commands\BenchmarkCommand::class,
     ],
 
 ];

@@ -46,8 +46,8 @@ class GenerateCommand extends Command
     protected function makeSure($path, $force)
     {
         if (($force === false)
-            and (file_exists($path))
-            and ($this->confirm('File already exists, do you want to replace? [y|N]') === false)
+            && (file_exists($path))
+            && ($this->confirm('File already exists, do you want to replace? [y|N]') === false)
         ) {
             $this->warn('==> Cannot generate command because destination file already exists.');
 
